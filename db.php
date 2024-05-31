@@ -58,7 +58,7 @@ function find($table, $arg)
 
         $sql .= "`id` ='{$arg}'";
     }
-    echo $sql;
+    // echo $sql;
     $row = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     return $row;
 }
@@ -102,7 +102,7 @@ function insert($table, $cols)
     $sql .= "(`" . join("`,`", array_keys($cols)) . "`)";
     $sql .= " VALUES('" . join("','", $cols) . "')";
 
-    echo $sql;
+    // echo $sql;
     return $pdo->exec($sql);
 }
 
@@ -122,7 +122,7 @@ function del($table, $arg)
     } else {
         $sql .= " `id`='{$arg}'";
     }
-    echo $sql;
+    // echo $sql;
     return $pdo->exec($sql);
 }
 
