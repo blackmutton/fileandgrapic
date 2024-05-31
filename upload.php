@@ -42,7 +42,11 @@ if (!empty($_FILES)) {
 
 
     <!----建立一個連結來查看上傳後的圖檔---->
-
+<<?php
+if(!empty($_FILES)){
+    echo "<img src='images/{$_FILES['file']['name']}'>";
+}
+?>
 
 </body>
 
