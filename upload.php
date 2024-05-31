@@ -36,6 +36,7 @@ if (!empty($_FILES)) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>檔案上傳</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
@@ -50,26 +51,31 @@ if (!empty($_FILES)) {
 
 
     <!----建立一個連結來查看上傳後的圖檔---->
-    <<?php
-        /* if (isset($_SESSION['file'])) {
+    <?php
+    /* if (isset($_SESSION['file'])) {
             foreach ($_SESSION['file'] as $file)
                 echo "<img src='images/{$file}' class='upload-img'>";
         } */
 
-        // 改用scandir()的方式來讀取圖片檔
-        // scandir()為掃描此資料夾的所有資訊
-        // $files = scandir("images/");
-        // 掃瞄出的資料會有. 和..，這是作業系統中表達此資料夾、回到上一個資料夾的方式，但對網頁呈現不需要，故用unset()拿走
-        /* unset($files[0], $files[1]);
+    // 改用scandir()的方式來讀取圖片檔
+    // scandir()為掃描此資料夾的所有資訊
+    // $files = scandir("images/");
+    // 掃瞄出的資料會有. 和..，這是作業系統中表達此資料夾、回到上一個資料夾的方式，但對網頁呈現不需要，故用unset()拿走
+    /* unset($files[0], $files[1]);
         foreach ($files as $file) {
             echo "<img src='images/{$file}' class='upload-img'>";
         } */
 
-        $images = all('images');
+    $images = all('images');
 
-        foreach ($images as $image) {
-            echo "<img src='images/{$image['name']}' class='upload-img'>";
-        }
-        ?> </body>
+    foreach ($images as $image) {
+        echo "<div class='upload-img'>";
+        echo "<a class='pen' href='edit_image.php?id={$image['id']}'><i class='fa-solid fa-pen-to-square'></i></a>";
+        echo "<a class='del' href='del_image.php?id={$image['id']}'><i class='fa-solid fa-xmark'></i></a>";
+        echo "<img src='images/{$image['name']}'>";
+        echo "</div>";
+    }
+    ?>
+</body>
 
 </html>

@@ -31,7 +31,7 @@ function save($table, $array)
  * @param $table 資料表名稱
  * @param $where where語法
  **/
-function all($table, $where='')
+function all($table, $where = '')
 {
     global $pdo;
 
@@ -59,7 +59,7 @@ function find($table, $arg)
         $sql .= "`id` ='{$arg}'";
     }
     echo $sql;
-    $row = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    $row = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     return $row;
 }
 /**
@@ -102,7 +102,7 @@ function insert($table, $cols)
     $sql .= "(`" . join("`,`", array_keys($cols)) . "`)";
     $sql .= " VALUES('" . join("','", $cols) . "')";
 
-    // echo $sql;
+    echo $sql;
     return $pdo->exec($sql);
 }
 
