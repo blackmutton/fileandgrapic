@@ -1,5 +1,5 @@
 <?php
-$dsn = "mysql:host=localhost;charset=utf8;dbname=school";
+$dsn = "mysql:host=localhost;charset=utf8;dbname=files";
 $pdo = new PDO($dsn, 'root', '');
 
 // 將函式中的foreach進行簡化
@@ -31,7 +31,7 @@ function save($table, $array)
  * @param $table 資料表名稱
  * @param $where where語法
  **/
-function all($table, $where)
+function all($table, $where='')
 {
     global $pdo;
 
