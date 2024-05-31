@@ -1,4 +1,5 @@
 <?php
+include_once "db.php";
 // 啟用session
 session_start();
 /**
@@ -15,7 +16,7 @@ if (!empty($_FILES)) {
     if (move_uploaded_file($_FILES['file']['tmp_name'], "images/" .
         $_FILES['file']['name'])) {
         // 由於可能上傳多張圖，所以須以陣列方式儲存
-        $_SESSION['file'][] = $_FILES['file']['name'];
+        // $_SESSION['file'][] = $_FILES['file']['name'];
         echo "檔案上傳成功";
     } else {
         echo "檔案上傳失敗";
@@ -46,9 +47,18 @@ if (!empty($_FILES)) {
 
     <!----建立一個連結來查看上傳後的圖檔---->
     <<?php
-        if (isset($_SESSION['file'])) {
+        /* if (isset($_SESSION['file'])) {
             foreach ($_SESSION['file'] as $file)
                 echo "<img src='images/{$file}' class='upload-img'>";
+        } */
+
+        // 改用scandir()的方式來讀取圖片檔
+        // scandir()為掃描此資料夾的所有資訊
+        $files = scandir("images/");
+        // 掃瞄出的資料會有. 和..，這是作業系統中表達此資料夾、回到上一個資料夾的方式，但對網頁呈現不需要，故用unset()拿走
+        unset($files[0], $files[1]);
+        foreach ($files as $file) {
+            echo "<img src='images/{$file}' class='upload-img'>";
         }
         ?> </body>
 
